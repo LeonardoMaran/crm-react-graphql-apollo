@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between d-flex">
@@ -11,7 +12,9 @@ const Header = () => (
             <div className="collapse navbar-collapse" id="navegacion">
                 <ul className="navbar-nav ml-auto text-right">
                     <li className="nav-item active">
-                        <a className="btn btn-success">Nuevo Cliente</a>
+                        <Link to="/cliente/nuevo" className="btn btn-success">
+                            Nuevo Cliente
+                        </Link>
                     </li>
                 </ul>
             </div>
