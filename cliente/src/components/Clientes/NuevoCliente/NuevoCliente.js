@@ -16,7 +16,14 @@ class NuevoCliente extends Component {
             email: '',
             tipo: ''
         },
-        error: false
+        error: false,
+        emails: []
+    }
+
+    nuevoCampoEmail = () => {
+        this.setState({
+            emails: this.state.emails.concat([{email: ''}])
+        })
     }
 
     render() {
@@ -100,7 +107,7 @@ class NuevoCliente extends Component {
                                     </div>
                                 </div>
                                 <div className="form-row">
-                                    <div className="form-group col-md-6">
+                                    <div className="form-group col-md-12">
                                         <label>Empresa</label>
                                         <input 
                                             type="text" 
@@ -116,7 +123,12 @@ class NuevoCliente extends Component {
                                             }}
                                         />
                                     </div>
-                                    <div className="form-group col-md-6">
+                                    <div className="form-group d-flex justify-content-center col-md-12">
+                                        <button onClick={this.nuevoCampoEmail} type="button" className="btn btn-warning">
+                                            Agregar Email
+                                        </button>
+                                    </div>
+                                    {/* <div className="form-group col-md-6">
                                         <label>Email</label>
                                         <input 
                                             type="email" 
@@ -131,7 +143,7 @@ class NuevoCliente extends Component {
                                                 })
                                             }}
                                         />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
