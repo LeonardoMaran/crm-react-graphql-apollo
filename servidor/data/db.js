@@ -9,7 +9,7 @@ const clientesSchema = new mongoose.Schema({
     nombre: String,
     apellido: String,
     empresa: String,
-    email: String,
+    emails: Array,
     edad: Number,
     tipo: String,
     pedidos: Array
