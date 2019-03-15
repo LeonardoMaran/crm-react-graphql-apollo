@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { CLIENTE_QUERY } from './../../../queries';
 import { Query } from 'react-apollo';
 
+import FormularioEditarCliente from './FormularioEditarCliente/FormularioEditarCliente';
+
 class EditarCliente extends Component {
     render() {
 
@@ -14,19 +16,25 @@ class EditarCliente extends Component {
             <Fragment>
                 <h2 className="text-center">Editar Cliente</h2>
 
-                <Query query={CLIENTE_QUERY} variables={{id}}>
-                    {({ loading, error, data }) => {
-                        if(loading) {
-                            return 'Cargando...'
-                        }
-                        if(error) {
-                            return `Error! ${error.message}`
-                        }
+                <div className="row justify-content-center">
+                    <Query query={CLIENTE_QUERY} variables={{id}}>
+                        {({ loading, error, data }) => {
+                            if(loading) {
+                                return 'Cargando...'
+                            }
+                            if(error) {
+                                return `Error! ${error.message}`
+                            }
 
-                        console.log(data);
-                        
-                    }}
-                </Query>
+                            console.log(data);
+                            return (
+                                <FormularioEditarCliente />
+                            )
+                            
+                        }}
+                    </Query>
+                </div>
+
             </Fragment>
         )
     }
