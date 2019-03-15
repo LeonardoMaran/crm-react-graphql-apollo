@@ -1,10 +1,22 @@
 import gql from "graphql-tag";
 
-export const CLIENTES_QUERY = gql `query {
-    getClientes {
-        id
-        nombre
-        apellido
-        empresa
+export const CLIENTES_QUERY = gql `
+    query ConsultarClientes {
+        getClientes {
+            id
+            nombre
+            apellido
+            empresa
+        }
     }
-}`;
+`;
+
+export const CLIENTE_QUERY = gql `
+    query ConsultarCliente($id: ID) {
+        getCliente(id: $id) {
+            nombre
+            apellido
+            empresa
+        }
+    }
+`;
