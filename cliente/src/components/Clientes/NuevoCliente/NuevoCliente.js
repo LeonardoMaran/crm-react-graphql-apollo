@@ -32,6 +32,23 @@ class NuevoCliente extends Component {
         })
     }
 
+    leerCampoEmail = (i) => (e) =>{
+        const nuevoEmail = this.state.emails.map((email, index) => {
+            if(i !== index) {
+                return email
+            } else {
+                return {
+                    ...email,
+                    email: e.target.value
+                }
+            }
+        })
+
+        this.setState({
+            emails: nuevoEmail
+        })
+    }
+
     render() {
         const { error } = this.state;
         let respuesta = (error ? <p className="alert alert-danger p-3 text-center">Todos los campos son Obligatoios</p> : '');
@@ -133,7 +150,7 @@ class NuevoCliente extends Component {
                                         <div key={index} className="from-group col-md-12">
                                             <label>Correo: {index + 1}</label>
                                             <div className="input-group">
-                                                <input type="email" placeholder="Email" className="form-control" />
+                                                <input onChange={this.leerCampoEmail(index)} type="email" placeholder="Email" className="form-control" />
                                                 <div className="input-group-append">
                                                     <button onClick={this.eliminarCampoEmail(index)} type="button" className="btn btn-danger"> &times; Eliminar </button>
                                                 </div>
