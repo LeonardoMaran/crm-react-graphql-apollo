@@ -123,7 +123,13 @@ class NuevoCliente extends Component {
                                             }}
                                         />
                                     </div>
-                                    <div className="form-group d-flex justify-content-center col-md-12">
+                                    {this.state.emails.map((input, index) => (
+                                        <div key={index} className="from-group col-md-12">
+                                            <label>Correo: {index + 1}</label>
+                                            <input type="email" placeholder="Email" className="form-control" />
+                                        </div>
+                                    ))}
+                                    <div className="form-group d-flex justify-content-center col-md-12 mt-4">
                                         <button onClick={this.nuevoCampoEmail} type="button" className="btn btn-warning">
                                             Agregar Email
                                         </button>
