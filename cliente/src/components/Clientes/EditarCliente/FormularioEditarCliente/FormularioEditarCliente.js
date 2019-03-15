@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class FormularioEditarCliente extends Component {
 
     state =  {
-        emails: []
+        cliente: this.props.cliente,
+        emails: this.props.cliente.emails
     }
 
     nuevoCampo = () => {
@@ -31,6 +32,7 @@ class FormularioEditarCliente extends Component {
     render() { 
 
             const {emails} = this.state;
+            console.log(this.state.cliente);
            
             return (
         
