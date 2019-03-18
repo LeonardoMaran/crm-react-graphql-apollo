@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 import { CLIENTES_QUERY } from './../../queries';
+import { ELIMINAR_CLIENTE } from './../../mutations';
 
 const Contactos = () => (
     <Query query={CLIENTES_QUERY} pollInterval={100}>
@@ -24,6 +25,15 @@ const Contactos = () => (
                                         {item.nombre} {item.apellido} | {item.empresa}
                                     </div>
                                     <div className="col-md-4 d-flex justify-content-end">
+                                        <button 
+                                            type="button" 
+                                            className="btn btn-danger d-block d-md-inline-block mr-2"
+                                            onClick={ () => {
+                                                console.log(item.id);
+                                                
+                                            }}
+                                            >
+                                        &times; Eliminar</button>
                                         <Link to={`/cliente/editar/${item.id}`} className="btn btn-success d-block d-md-inline-block">
                                             Editar Cliente
                                         </Link>
