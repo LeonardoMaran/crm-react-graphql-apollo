@@ -26,7 +26,7 @@ enum TipoCliente {
 type Query {
     getClientes(limite: Int, offset: Int): [Cliente]
     getCliente(id: ID) : Cliente
-    totalClientes() : String
+    totalClientes : String
 }
 
 input EmailInput {
