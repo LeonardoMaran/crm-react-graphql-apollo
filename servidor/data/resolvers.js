@@ -63,7 +63,7 @@ export const resolvers = {
         nuevoProducto: (root, {input}) => {
             const nuevoProducto = new Productos({
                 nombre: input.nombre,
-                precio: imput.precio,
+                precio: input.precio,
                 stock: input.stock
             })
             nuevoProducto.id = nuevoProducto._id;
