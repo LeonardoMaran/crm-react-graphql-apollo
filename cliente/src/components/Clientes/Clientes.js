@@ -18,9 +18,21 @@ class Clientes extends Component {
         }
     }
 
+    paginaAnterior = () => {
+        console.log('Anterior...');
+    }
+    paginaSiguiente = () => {
+        this.setState({
+            paginador: {
+                offset: this.state.paginador.offset+ this.limitePorPagina,
+                actual: this.state.paginador.actual + 1
+            }
+        })
+    }
+
     render() {
         return (
-            <Query query={CLIENTES_QUERY} pollInterval={100}>
+            <Query query={CLIENTES_QUERY} pollInterval={100} variables={{limite: this.limitePorPagina, offset: this.state.paginador.offset}}>
                 {({ loading, error, data, startPolling, stopPolling }) => {
                     if(loading) return "Cargando...";
                     if(error) return `Error: ${error.message}`;
@@ -69,7 +81,9 @@ class Clientes extends Component {
                             <Paginador 
                                 actual={this.state.paginador.actual}
                                 totalClientes={data.totalClientes}
-                                limitePorPagina={this.limitePorPagina} />
+                                limitePorPagina={this.limitePorPagina}
+                                paginaAnterior={this.paginaAnterior}
+                                paginaSiguiente={this.paginaSiguiente} />
                                 
                         </Fragment>
                     )
