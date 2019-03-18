@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Clientes } from './db';
+import { Clientes, Productos } from './db';
 import { rejects } from 'assert';
 
 export const resolvers = {
@@ -59,6 +59,21 @@ export const resolvers = {
                     else resolve("Se elimino Correctamente")
                 })
             });
+        },
+        nuevoProducto: (root, {input}) => {
+            const nuevoProducto = new Productos({
+                nombre: input.nombre,
+                precio: imput.precio,
+                stock: input.stock
+            })
+            nuevoProducto.id = nuevoProducto._id;
+
+            return new Promise((resolve, object) => {
+                nuevoProducto.save((error) => {
+                    if(error) rejects(error)
+                    else resolve(nuevoProducto)
+                })
+            })
         }
     }
 }
