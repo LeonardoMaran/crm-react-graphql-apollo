@@ -7,10 +7,8 @@ import FormularioEditarCliente from './FormularioEditarCliente/FormularioEditarC
 class EditarCliente extends Component {
     render() {
 
-        // ID del contacto al editar
-        const { id } = this.props.match.params;
-        console.log(id);
-        
+        // ID del Cliente al editar
+        const { id } = this.props.match.params;        
 
         return (
             <Fragment>
@@ -18,17 +16,20 @@ class EditarCliente extends Component {
 
                 <div className="row justify-content-center">
                     <Query query={CLIENTE_QUERY} variables={{id}}>
-                        {({ loading, error, data }) => {
+                        {({ loading, error, data, refetch }) => {
                             if(loading) {
                                 return 'Cargando...'
                             }
                             if(error) {
                                 return `Error! ${error.message}`
                             }
+                            // console.log(this.props);
+                            
 
                             return (
                                 <FormularioEditarCliente
-                                    cliente={data.getCliente} />
+                                    cliente={data.getCliente}
+                                    refetch={refetch} />
                             )
                             
                         }}

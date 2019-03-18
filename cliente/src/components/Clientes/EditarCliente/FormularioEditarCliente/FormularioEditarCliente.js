@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { ACTUALIZAR_CLIENTE } from './../../../../mutations'
+import { Mutation } from 'react-apollo';
+
+import { withRouter } from 'react-router-dom';
 
 class FormularioEditarCliente extends Component {
 
@@ -17,9 +21,7 @@ class FormularioEditarCliente extends Component {
         const nuevoMail = this.state.emails.map((email, index) => {
                 if (i !== index) return email;
                 return { ...email, email: e.target.value };
-        });
-        console.log(nuevoMail);
-        
+        });        
         this.setState({ emails: nuevoMail });
     }
 
@@ -33,11 +35,39 @@ class FormularioEditarCliente extends Component {
 
     render() { 
             const { nombre, apellido, empresa, edad, tipo } = this.state.cliente;
-            const {emails} = this.state;
-           
+            const { emails } = this.state;            
+
             return (
-        
-                   <form className="col-md-8 m-3">
+                <Mutation 
+                    mutation={ACTUALIZAR_CLIENTE} 
+                    onCompleted={ () => {
+                        this.props.refetch().then( () => {
+                            this.props.history.push('/')
+                        })
+                    }}>
+                    {actualizarCliente => (
+                        <form className="col-md-8 m-3" onSubmit={e =>{
+                            e.preventDefault();
+
+                            const { id, nombre, apellido, empresa, edad, tipo } = this.state.cliente;
+                            const  { emails } = this.state;
+
+                            const input = {
+                                id,
+                                nombre,
+                                apellido,
+                                empresa,
+                                edad: Number(edad),
+                                tipo,
+                                emails
+                            }
+                            // console.log(input);
+
+                            actualizarCliente({
+                                variables: {input}
+                            })
+                            
+                        }}>
                             <div className="form-row">
                                 <div className="form-group col-md-6">
                                     <label>Nombre</label>
@@ -69,10 +99,10 @@ class FormularioEditarCliente extends Component {
                                                 }
                                             })
                                         }}
-                                     />
+                                        />
                                 </div>
                             </div>
-                          
+                            
                             <div className="form-row">
                                 <div className="form-group col-md-12">
                                     <label>Empresa</label>
@@ -161,9 +191,11 @@ class FormularioEditarCliente extends Component {
                             </div>
                             <button type="submit" className="btn btn-success float-right">Guardar Cambios</button>
                         </form>
+                    )}
+                </Mutation>
             )      
     }
 }
  
 
-export default FormularioEditarCliente;
+export default withRouter(FormularioEditarCliente);
