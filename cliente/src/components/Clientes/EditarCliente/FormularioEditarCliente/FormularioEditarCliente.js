@@ -18,6 +18,8 @@ class FormularioEditarCliente extends Component {
                 if (i !== index) return email;
                 return { ...email, email: e.target.value };
         });
+        console.log(nuevoMail);
+        
         this.setState({ emails: nuevoMail });
     }
 
@@ -98,8 +100,8 @@ class FormularioEditarCliente extends Component {
                                                 type="email"
                                                 placeholder={`Email`}
                                                 className="form-control" 
-                                                onChange={this.leerCampo(index)}
                                                 defaultValue={input.email}
+                                                onChange={this.leerCampo(index)}
                                             />
                                             <div className="input-group-append">
                                                 <button 
