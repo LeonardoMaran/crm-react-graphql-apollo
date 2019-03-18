@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { CLIENTES_QUERY } from './../../queries';
 import { ELIMINAR_CLIENTE } from './../../mutations';
 
+import Paginador from './Paginador/Paginador';
+
 class Clientes extends Component {
 
     state = {
@@ -61,6 +63,10 @@ class Clientes extends Component {
                                     )
                                 })}
                             </ul>
+                            
+                            <Paginador 
+                                actual={this.state.paginador.actual} />
+                                
                         </Fragment>
                     )
                 }}
