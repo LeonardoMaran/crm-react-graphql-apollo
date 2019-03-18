@@ -8,6 +8,7 @@ export const CLIENTES_QUERY = gql `
             apellido
             empresa
         }
+        totalClientes
     }
 `;
 

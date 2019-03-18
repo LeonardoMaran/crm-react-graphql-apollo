@@ -65,7 +65,8 @@ class Clientes extends Component {
                             </ul>
                             
                             <Paginador 
-                                actual={this.state.paginador.actual} />
+                                actual={this.state.paginador.actual}
+                                totalClientes={data.totalClientes} />
                                 
                         </Fragment>
                     )
