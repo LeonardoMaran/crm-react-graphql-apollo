@@ -31,7 +31,7 @@ export const resolvers = {
                 Productos.findById(id, (error, producto) => {
                     if(error) rejects(error)
                     else resolve(producto)
-                });
+                })
             })
         }
     },
@@ -83,6 +83,14 @@ export const resolvers = {
                 nuevoProducto.save((error) => {
                     if(error) rejects(error)
                     else resolve(nuevoProducto)
+                })
+            })
+        },
+        actualizarProducto: (root, {input}) => {
+            return new Promise((resolve, producto) => {
+                Productos.findOneAndUpdate({_id: input.id}, input, {new: true}, (error, producto) => {
+                    if(error) ejects(error)
+                    else resolve(producto)
                 })
             })
         }
