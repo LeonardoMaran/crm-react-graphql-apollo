@@ -32,12 +32,22 @@ export const ELIMINAR_CLIENTE = gql `
     }
 `;
 
+export const NUEVO_PRODUCTO = gql `
+    mutation nuevoProducto($input: ProductoInput) {
+        nuevoProducto(input: $input) {
+            nombre
+            precio
+            stock
+        }
+    }
+`;
+
 export const ACTUALIZAR_PRODUCTO = gql `
     mutation actualizarProducto($input: ProductoInput) {
-    actualizarProducto(input: $input) {
-        nombre
-        precio
-        stock
-    }
+        actualizarProducto(input: $input) {
+            nombre
+            precio
+            stock
+        }
     }
 `;
