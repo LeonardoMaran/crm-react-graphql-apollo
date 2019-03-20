@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { Query } from 'react-apollo';
-import { OBTENER_PRODUCTOS } from './../../queries';
 import { Link } from 'react-router-dom';
+
+import { Query, Mutation } from 'react-apollo';
+import { OBTENER_PRODUCTOS } from './../../queries';
+import { ELIMINAR_PRODUCTO } from './../../mutations';
 
 class Productos extends Component {
 
@@ -16,7 +18,7 @@ class Productos extends Component {
 
                 <Query 
                     query={OBTENER_PRODUCTOS} 
-                    pollInterval={1000} >
+                    pollInterval={100} >
                     
                     {({ loading, error, data, startPolling, stopPolling }) => {
                         if(loading) return "Cargando...";
@@ -45,7 +47,20 @@ class Productos extends Component {
                                                 <td>{item.precio}</td>
                                                 <td>{item.stock}</td>
                                                 <td>
-                                                    <button type="button" className="btn btn-danger">&times; Eliminar</button>
+                                                    <Mutation mutation={ELIMINAR_PRODUCTO}>
+                                                        {eliminarProduto => (
+                                                            <button 
+                                                                onClick={ () => {
+                                                                    if(window.confirm('Seguro que quieres eliminar el produto=')) {
+                                                                        eliminarProduto({variables: {id}})
+                                                                    }
+                                                                } } 
+                                                                type="button" 
+                                                                className="btn btn-danger">
+                                                                    &times; Eliminar
+                                                            </button>
+                                                        )}
+                                                    </Mutation>
                                                 </td>
                                                 <td>
                                                     <Link to={`/productos/editar/${id}`} className="btn btn-success">Editar Producto</Link>
