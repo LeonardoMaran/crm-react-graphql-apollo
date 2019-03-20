@@ -38,3 +38,14 @@ export const OBTENER_PRODUTO = gql `
         }
     }
 `;
+
+export const OBTENER_PRODUCTOS = gql `
+    query obtenerProductos {
+        obtenerProductos {
+            id
+            nombre
+            precio
+            stock
+        }
+    }
+`;
