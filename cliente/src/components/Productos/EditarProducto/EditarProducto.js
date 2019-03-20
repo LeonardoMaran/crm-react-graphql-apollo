@@ -4,7 +4,8 @@ import { Query } from 'react-apollo';
 import { OBTENER_PRODUTO } from './../../../queries'
 
 // Components
-import { FormularioEditarProducto } from './FormularioEditarProducto/FormularioEditarProducto'
+import FormularioEditarProducto from './FormularioEditarProducto/FormularioEditarProducto';
+
 
 class EditarProducto extends Component {
     render() {
