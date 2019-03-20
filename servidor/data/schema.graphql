@@ -86,4 +86,6 @@ type Mutation {
     nuevoProducto(input: ProductoInput) : Producto
     """ Te permite Actualizar Productos """
     actualizarProducto(input: ProductoInput) : Producto
+    """ Te permite Eliminar Productos """
+    eliminarProducto(id: ID!) : String
 }
