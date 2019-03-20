@@ -28,9 +28,9 @@ export const CLIENTE_QUERY = gql `
     }
 `;
 
-export const OBTENER_PRODUTO = gql `
-    query obtenerProducto($id: ID!) {
-        obtenerProducto(id: $id) {
+export const OBTENER_PRODUCTOS = gql `
+    query obtenerProductos {
+        obtenerProductos {
             id
             nombre
             precio
@@ -39,9 +39,9 @@ export const OBTENER_PRODUTO = gql `
     }
 `;
 
-export const OBTENER_PRODUCTOS = gql `
-    query obtenerProductos {
-        obtenerProductos {
+export const OBTENER_PRODUTO = gql `
+    query obtenerProducto($id: ID!) {
+        obtenerProducto(id: $id) {
             id
             nombre
             precio
