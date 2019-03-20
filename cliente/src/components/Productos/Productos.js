@@ -4,17 +4,28 @@ import { Link } from 'react-router-dom';
 import { Query, Mutation } from 'react-apollo';
 import { OBTENER_PRODUCTOS } from './../../queries';
 import { ELIMINAR_PRODUCTO } from './../../mutations';
+import Exito from './../Alertas/Exito';
 
 class Productos extends Component {
 
     state = {
-
+        alerta: {
+            mostrar: false,
+            mensaje: ''
+        }
     }
 
     render() {
+
+        const { alerta: {mostrar, mensaje} } = this.state;
+
+        const alerta = (mostrar) ? <Exito mensaje={mensaje} /> : '';
+
         return (
             <Fragment>
                 <h1 className="text-center mb-5">Productos</h1>
+
+                {alerta}
 
                 <Query 
                     query={OBTENER_PRODUCTOS} 
@@ -47,11 +58,30 @@ class Productos extends Component {
                                                 <td>{item.precio}</td>
                                                 <td>{item.stock}</td>
                                                 <td>
-                                                    <Mutation mutation={ELIMINAR_PRODUCTO}>
+                                                    <Mutation 
+                                                        mutation={ELIMINAR_PRODUCTO}
+                                                        onCompleted={(data) => {
+                                                            // console.log(data)
+                                                            this.setState({
+                                                                alerta: {
+                                                                    mostrar: true,
+                                                                    mensaje: data.eliminarProducto
+                                                                }
+                                                            }, () => {
+                                                                setTimeout(() => {
+                                                                    this.setState({
+                                                                        alerta: {
+                                                                            mostrar: false,
+                                                                            mensaje: ''
+                                                                        }
+                                                                    })
+                                                                }, 3000)
+                                                            })
+                                                        }} >
                                                         {eliminarProduto => (
                                                             <button 
                                                                 onClick={ () => {
-                                                                    if(window.confirm('Seguro que quieres eliminar el produto=')) {
+                                                                    if(window.confirm('Seguro que quieres eliminar el produto?')) {
                                                                         eliminarProduto({variables: {id}})
                                                                     }
                                                                 } } 
