@@ -8,7 +8,8 @@ import Resumen from './Resumen/Resumen';
 class ContenidoPedido extends Component {
 
     state = {
-        productos: []
+        productos: [],
+        total: 0
     }
 
     seleccionarProducto = (productos) => {
@@ -21,20 +22,35 @@ class ContenidoPedido extends Component {
     actualizarCantidad = (cantidad, index) => {
         // console.log(cantidad);
 
+        let nuevoTotal = 0;
+
         // Leer el state de productos
         const productos = this.state.productos;
+
+        // Cuando todos los productos estan en 0
+        if(productos.length === 0) {
+            this.setState({
+                total: nuevoTotal
+            })
+            return;
+        }
+
+        // Agregar la cantidad desde la interface
         productos[index].cantidad = Number(cantidad);
+
+        // Realizar la operacion de Cantidad X Precio
+        productos.map(producto => nuevoTotal += (producto.cantidad * producto.precio));
+
+        
+        
         console.log(productos);
         // console.log(index);
         
 
-        // Actualizar cantidad de los productos
-
-        // Validamos
-
         // Agregamos al state
         this.setState({
-            productos
+            productos,
+            total: nuevoTotal
         })
     }
 
@@ -57,6 +73,13 @@ class ContenidoPedido extends Component {
                 <Resumen
                     productos={this.state.productos}
                     actualizarCantidad={this.actualizarCantidad}  />
+
+                <p className="font-weight-bold float-right mt-3">
+                    Total:
+                    <span className="font-weight-normal">
+                        &nbsp;{this.state.total} €
+                    </span>
+                </p>
             </Fragment>
         )
     }
