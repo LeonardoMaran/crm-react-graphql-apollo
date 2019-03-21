@@ -13,7 +13,10 @@ class Producto extends Component {
                     <td>{producto.precio} €</td>
                     <td>{producto.stock} Uds.</td>
                     <td>
-                        <input type="number" className="form-control" />
+                        <input 
+                            type="number" 
+                            className="form-control"
+                            onChange={e => this.props.actualizarCantidad(e.target.value, this.props.index)} />
                     </td>
                     <td>
                         <button type="button" className="btn btn-danger font-weight-bold">&times; Eliminar</button>
