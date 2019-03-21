@@ -6,12 +6,18 @@ import { CLIENTES_QUERY } from './../../queries';
 import { ELIMINAR_CLIENTE } from './../../mutations';
 
 import Paginador from './Paginador/Paginador';
+import Exito from './../Alertas/Exito';
+
 
 class Clientes extends Component {
 
     limitePorPagina = 2;
 
     state = {
+        alerta : {
+            mostrar: false,
+            mensaje: ''
+        },
         paginador: {
             offset: 0,
             actual: 1
@@ -36,6 +42,11 @@ class Clientes extends Component {
     }
 
     render() {
+
+        const { alerta: {mostrar, mensaje} } = this.state;
+
+        const alerta = (mostrar) ? <Exito mensaje={mensaje} /> : '';
+
         return (
             <Query query={CLIENTES_QUERY} pollInterval={100} variables={{limite: this.limitePorPagina, offset: this.state.paginador.offset}}>
                 {({ loading, error, data, startPolling, stopPolling }) => {
@@ -45,6 +56,9 @@ class Clientes extends Component {
                     return (
                         <Fragment>
                             <h2 className="text-center">Listado Clientes</h2>
+
+                           {alerta}
+
                             <ul className="list-group mt-4">
                                 {data.getClientes.map(item => {
                                     const { id } = item;
@@ -55,7 +69,26 @@ class Clientes extends Component {
                                                     {item.nombre} {item.apellido} | {item.empresa}
                                                 </div>
                                                 <div className="col-md-4 d-flex justify-content-end">
-                                                    <Mutation mutation={ELIMINAR_CLIENTE}>
+                                                    <Mutation 
+                                                        mutation={ELIMINAR_CLIENTE}
+                                                        onCompleted={(data) => {
+                                                            // console.log(data)
+                                                            this.setState({
+                                                                alerta: {
+                                                                    mostrar: true,
+                                                                    mensaje: data.eliminarCliente
+                                                                }
+                                                            }, () => {
+                                                                setTimeout(() => {
+                                                                    this.setState({
+                                                                        alerta: {
+                                                                            mostrar: false,
+                                                                            mensaje: ''
+                                                                        }
+                                                                    })
+                                                                }, 3000)
+                                                            })
+                                                        }}>
                                                     {eliminarCliente => (
                                                         <button 
                                                             type="button" 
