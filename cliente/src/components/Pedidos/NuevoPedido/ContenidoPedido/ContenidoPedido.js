@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import Select from 'react-select';
 import Animated from 'react-select/lib/animated';
 
+import Resumen from './Resumen/Resumen';
+
 
 class ContenidoPedido extends Component {
 
@@ -31,6 +33,9 @@ class ContenidoPedido extends Component {
                     placeholder={'Seleccionar productos...'}
                     getOptionValue={(options) => options.id}
                     getOptionLabel={(options) => options.nombre} />
+
+                <Resumen
+                    productos={this.state.productos}  />
             </Fragment>
         )
     }
