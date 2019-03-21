@@ -6,7 +6,7 @@ import { CLIENTE_QUERY } from './../../../../queries';
 const DatosCliente = (id) => {
     return (
         <Fragment>
-            <h2 className="text-center mb-3">Resumen de Cliente</h2>
+            <h3 className="text-center mb-3">Resumen de Cliente</h3>
 
             <Query query={CLIENTE_QUERY} variables={id} pollInterval={500}>
                 {( { loading, error, data, startPolling, stopPolling } ) => {
