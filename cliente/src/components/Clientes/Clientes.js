@@ -7,6 +7,7 @@ import { ELIMINAR_CLIENTE } from './../../mutations';
 
 import Paginador from './Paginador/Paginador';
 import Exito from './../Alertas/Exito';
+import NuevoPedido from './../Pedidos/NuevoPedido/NuevoPedido';
 
 
 class Clientes extends Component {
@@ -65,10 +66,16 @@ class Clientes extends Component {
                                     return (
                                         <li key={item.id} className="list-group-item">
                                             <div className="row justify-content-between align-item-center">
-                                                <div className="col-md-8 d-flex justify-content-between align-item-center"> 
+                                                <div className="col-md-7 d-flex justify-content-between align-item-center"> 
                                                     {item.nombre} {item.apellido} | {item.empresa}
                                                 </div>
-                                                <div className="col-md-4 d-flex justify-content-end">
+                                                <div className="col-md-5 d-flex justify-content-end">
+                                                    <Link to={`/pedidos/nuevo/${id}`} className="btn btn-warning d-block d-md-inline-block mr-2">
+                                                        &#43; Nuevo Pedido
+                                                    </Link>
+                                                    <Link to={`/cliente/editar/${item.id}`} className="btn btn-success d-block d-md-inline-block mr-2">
+                                                        Editar Cliente
+                                                    </Link>
                                                     <Mutation 
                                                         mutation={ELIMINAR_CLIENTE}
                                                         onCompleted={(data) => {
@@ -92,7 +99,7 @@ class Clientes extends Component {
                                                     {eliminarCliente => (
                                                         <button 
                                                             type="button" 
-                                                            className="btn btn-danger d-block d-md-inline-block mr-2"
+                                                            className="btn btn-danger d-block d-md-inline-block"
                                                             onClick={ () => {
                                                                 if(window.confirm('Seguro que quieres eliminar este cliente?')) {
                                                                     eliminarCliente({
@@ -102,10 +109,6 @@ class Clientes extends Component {
                                                             }} > &times; Eliminar</button>
                                                     )}
                                                     </Mutation>
-                                                    
-                                                    <Link to={`/cliente/editar/${item.id}`} className="btn btn-success d-block d-md-inline-block">
-                                                        Editar Cliente
-                                                    </Link>
                                                 </div>
                                             </div>
                                         </li>
