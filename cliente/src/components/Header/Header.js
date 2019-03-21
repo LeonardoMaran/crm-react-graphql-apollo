@@ -11,13 +11,31 @@ const Header = () => (
 
             <div className="collapse navbar-collapse" id="navegacion">
                 <ul className="navbar-nav ml-auto text-right">
-                    <li className="nav-item active">
-                        <Link to="/cliente/nuevo" className="btn btn-success mr-2">
-                            Nuevo Cliente
-                        </Link>
-                        <Link to="/productos/nuevo" className="btn btn-success">
-                            Nuevo Producto
-                        </Link>
+                    <li className="nav-item dropdown  mb-2 mt-2 mr-md-2 mb-md-0 mt-md-0">
+                        <button className="nav-link dropdown-toggle btn btn-block btn-success" data-toggle="dropdown" id="navegacionMenuClientes" aria-haspopup="true" aria-expanded="false">
+                            Clientes
+                        </button>
+                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navegacionMenuClientes">
+                            <Link to="/clientes" className="dropdown-item">
+                                Ver Clientes
+                            </Link>
+                            <Link to="/clientes/nuevo" className="dropdown-item">
+                                Nuevo Cliente
+                            </Link>
+                        </div>
+                    </li>
+                    <li className="nav-item dropdown">
+                        <button className="nav-link dropdown-toggle btn btn-block btn-success" data-toggle="dropdown" id="navegacionMenuProductos" aria-haspopup="true" aria-expanded="false">
+                            Productos
+                        </button>
+                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navegacionMenuProductos">
+                            <Link to="/Productos" className="dropdown-item">
+                                Ver Productos
+                            </Link>
+                            <Link to="/Productos/nuevo" className="dropdown-item">
+                                Nuevo Producto
+                            </Link>
+                        </div>
                     </li>
                 </ul>
             </div>
