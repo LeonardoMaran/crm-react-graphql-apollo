@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const DatosCliente = () => {
+import { Query } from 'react-apollo';
+import { CLIENTE_QUERY } from './../../../../queries';
+
+const DatosCliente = (id) => {
     return (
-        <h2>Resumen de Cliente</h2>
+        <Fragment>
+            <h2 className="text-center mb-3">Resumen de Cliente</h2>
+
+            <Query query={CLIENTE_QUERY} variables={id} pollInterval={500}>
+                {( { loading, error, data, startPolling, stopPolling } ) => {
+                    if(loading) return 'Cargando...';
+                    if(error) return `Error ${error.message}`;
+
+                    console.log(data);
+
+                    return (
+                        <h1>Hola</h1>
+                    )
+                    
+                }}
+            </Query>
+            
+        </Fragment>
     )
 }
 
 export default DatosCliente;
+
