@@ -23,7 +23,11 @@ const Resumen = (props) => {
                 </thead>
                 <tbody>
                     {productos.map((producto, index) => (
-                        <Producto />
+                        <Producto
+                            key={producto.id}
+                            id={producto.id}
+                            producto={producto}
+                            index={index} />
                     ))}
                 </tbody>
             </table>
