@@ -28,7 +28,8 @@ const Resumen = (props) => {
                             id={producto.id}
                             producto={producto}
                             index={index}
-                            actualizarCantidad={props.actualizarCantidad} />
+                            actualizarCantidad={props.actualizarCantidad}
+                            eliminarProducto={props.eliminarProducto} />
                     ))}
                 </tbody>
             </table>

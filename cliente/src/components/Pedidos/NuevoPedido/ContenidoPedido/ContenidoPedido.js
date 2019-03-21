@@ -54,6 +54,20 @@ class ContenidoPedido extends Component {
         })
     }
 
+    eliminarProducto = (id) => {
+        // console.log(id);
+
+        const productos = this.state.productos;
+
+        const productosRestantes = productos.filter(producto => producto.id !== id);
+        console.log(productosRestantes);
+
+        this.setState({
+            productos: productosRestantes
+        })
+
+    }
+
     render() {
 
 
@@ -72,7 +86,8 @@ class ContenidoPedido extends Component {
 
                 <Resumen
                     productos={this.state.productos}
-                    actualizarCantidad={this.actualizarCantidad}  />
+                    actualizarCantidad={this.actualizarCantidad}
+                    eliminarProducto={this.eliminarProducto}  />
 
                 <p className="font-weight-bold float-right mt-3">
                     Total:
