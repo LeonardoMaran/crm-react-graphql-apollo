@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import DatosCliente from './DatosCliente/DatosClientes';
 
-// Components
+import { Query } from 'react-apollo';
+import { OBTENER_PRODUCTOS } from './../../../queries';
+
+import DatosCliente from './DatosCliente/DatosClientes';
+import ContenidoPedido from './ContenidoPedido/ContenidoPedido';
+
+// CSS
+import './../../../css/spinner.css';
 
 
 class NuevoPedido extends Component {
@@ -20,7 +26,24 @@ class NuevoPedido extends Component {
                     </div>
 
                     <div className="col-md-9">
-                        Pedido Aqui
+                        <Query query={OBTENER_PRODUCTOS}>
+                            {( { loading, error, data } ) => {
+                                if(loading) return (
+                                    <div className="spinner">
+                                        <div className="dot1"></div>
+                                        <div className="dot2"></div>
+                                    </div>
+                                )
+
+                                if(error) return `Error ${error.message}`;
+
+                                return (
+                                    <ContenidoPedido
+                                        productos={data.obtenerProductos}
+                                        id={id} />
+                                )
+                            }}
+                        </Query>
                     </div>
                 </div>
             </Fragment>
