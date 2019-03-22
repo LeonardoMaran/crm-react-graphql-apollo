@@ -82,7 +82,8 @@ class ContenidoPedido extends Component {
                     components={Animated()}
                     placeholder={'Seleccionar productos...'}
                     getOptionValue={(options) => options.id}
-                    getOptionLabel={(options) => options.nombre} />
+                    getOptionLabel={(options) => options.nombre}
+                    value={this.state.productos} />
 
                 <Resumen
                     productos={this.state.productos}
