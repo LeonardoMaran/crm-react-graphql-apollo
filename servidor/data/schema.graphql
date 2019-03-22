@@ -18,8 +18,8 @@ type Producto {
 }
 type Pedido {
     id: ID
-    pedido: [PedidoProductoInput],
-    total: Number,
+    pedido: [PedidoProducto],
+    total: Int,
     fecha: String,
     cliente: ID,
     estado: EstadoPedido
@@ -56,11 +56,6 @@ input EmailInput {
     email: String
 }
 
-input PedidoInput {
-    producto: String
-    precio: Int
-}
-
 """ Campos para los clientes nuevos """
 input ClienteInput {
     id: ID
@@ -70,7 +65,6 @@ input ClienteInput {
     emails: [EmailInput!]!
     edad: Int!
     tipo: TipoCliente!
-    pedidos: [PedidoInput]
 }
 
 """ Campos para los Productos nuevos """
@@ -85,7 +79,7 @@ input ProductoInput {
 input PedidoInput {
     id: ID
     pedido: [PedidoProductoInput],
-    total: Number,
+    total: Int,
     fecha: String,
     cliente: ID,
     estado: EstadoPedido

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Clientes, Productos } from './db';
+import { Clientes, Productos, Pedidos } from './db';
 import { rejects } from 'assert';
 
 export const resolvers = {
