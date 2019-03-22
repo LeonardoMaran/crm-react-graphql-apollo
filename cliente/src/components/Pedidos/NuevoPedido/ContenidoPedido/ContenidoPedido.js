@@ -19,38 +19,47 @@ class ContenidoPedido extends Component {
         })
     }
 
-    actualizarCantidad = (cantidad, index) => {
-        // console.log(cantidad);
-
-        let nuevoTotal = 0;
-
+    actualizarTotal = () => {
         // Leer el state de productos
         const productos = this.state.productos;
 
         // Cuando todos los productos estan en 0
         if(productos.length === 0) {
             this.setState({
-                total: nuevoTotal
+                total: 0
             })
             return;
         }
 
-        // Agregar la cantidad desde la interface
-        productos[index].cantidad = Number(cantidad);
+        let nuevoTotal = 0;
 
         // Realizar la operacion de Cantidad X Precio
         productos.map(producto => nuevoTotal += (producto.cantidad * producto.precio));
 
-        
-        
-        console.log(productos);
+        // Agregamos al state
+        this.setState({
+            total: nuevoTotal
+        })
+    }
+
+    actualizarCantidad = (cantidad, index) => {
+        // console.log(cantidad);
+
+        // Leer el state de productos
+        const productos = this.state.productos;
+
+        // Agregar la cantidad desde la interface
+        productos[index].cantidad = Number(cantidad);
+
+        // console.log(productos);
         // console.log(index);
         
 
         // Agregamos al state
         this.setState({
-            productos,
-            total: nuevoTotal
+            productos
+        }, () => {
+            this.actualizarTotal();
         })
     }
 
@@ -64,6 +73,8 @@ class ContenidoPedido extends Component {
 
         this.setState({
             productos: productosRestantes
+        }, () => {
+            this.actualizarTotal();
         })
 
     }

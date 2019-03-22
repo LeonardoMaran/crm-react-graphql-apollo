@@ -2,15 +2,13 @@ import React, { Component, Fragment } from 'react'
 
 class Producto extends Component {
 
-
     render() {
 
         const { producto } = this.props;
         // console.log(producto);
 
         // console.log(this.props);
-        
-        
+
         
         return (
             <Fragment>
