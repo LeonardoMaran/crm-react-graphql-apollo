@@ -6,28 +6,39 @@ type Cliente {
     emails: [Email]
     edad: Int
     tipo: TipoCliente
-    pedidos: [Pedido]
 }
 type Email {
     email: String
 }
-
-type Pedido {
-    producto: String
-    precio: Int
-}
-
 type Producto {
     id: ID
     nombre: String
     precio: Int
     stock: Int
 }
+type Pedido {
+    id: ID
+    pedido: [PedidoProductoInput],
+    total: Number,
+    fecha: String,
+    cliente: ID,
+    estado: EstadoPedido
+}
+type PedidoProducto {
+    id: ID
+    cantidad: Int
+}
+
 
 """ Asigna la categoria del cliente """
 enum TipoCliente {
     BASICO
     PREMIUM
+}
+enum EstadoPedido {
+    PENDIENTE
+    COMPLETADO
+    CANCELADO
 }
 
 type Query {
@@ -70,6 +81,21 @@ input ProductoInput {
     stock: Int!
 }
 
+""" Campos para los Pedidos nuevos """
+input PedidoInput {
+    id: ID
+    pedido: [PedidoProductoInput],
+    total: Number,
+    fecha: String,
+    cliente: ID,
+    estado: EstadoPedido
+}
+
+input PedidoProductoInput {
+    id: ID
+    cantidad: Int
+}
+
 """ Mutation para crear nuevos Clientes """
 type Mutation {
     #Nombre del Resolver, Input con Datos y Valor que Retorna
@@ -89,4 +115,8 @@ type Mutation {
     actualizarProducto(input: ProductoInput) : Producto
     """ Te permite Eliminar Productos """
     eliminarProducto(id: ID!) : String
+
+    # Pedidos
+    """ Nuevo pedido """
+    nuevoPedido(input: PedidoInput) : Pedido
 }
