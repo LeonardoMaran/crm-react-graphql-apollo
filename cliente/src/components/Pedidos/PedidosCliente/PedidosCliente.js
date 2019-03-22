@@ -38,7 +38,7 @@ const PedidosCliente = (props) => {
                         return (
                             data.obtenerPedidos.map(pedido => (
                                 <Pedido
-                                    key={Pedido.id}
+                                    key={pedido.id}
                                     pedido={pedido}
                                     cliente={cliente} />
                             ))
