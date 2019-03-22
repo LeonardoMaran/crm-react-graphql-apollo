@@ -121,6 +121,18 @@ export const resolvers = {
             nuevoPedido.id = nuevoPedido._id;
 
             return new Promise((resolve, object) => {
+                // Recorrer y actualizar la cantidad de producto
+                input.pedido.forEach(pedido => {
+                    console.log(pedido);
+                    Productos.findOneAndUpdate(
+                        {_id : pedido.id},
+                        {$inc: {stock: -pedido.cantidad}},
+                        (error, resolve) => {
+                            if(error) return new Error(error)
+                        }
+                    );
+                })
+
                 nuevoPedido.save((error) => {
                     if(error) rejects(error)
                     else resolve(nuevoPedido)
