@@ -6,6 +6,8 @@ import { ACTUALIZAR_ESTADO } from './../../../../mutations';
 
 import ResumenProducto from './ResumenProducto/ResumenProducto';
 
+import './Pedido.css';
+
 
 const Pedido = (props) => {
 
@@ -14,11 +16,25 @@ const Pedido = (props) => {
     const {id} = pedido;
     // console.log(id);
 
+    // Fecha del pedido
     const fecha = new Date(Number(pedido.fecha));
+
+    // Estado y clases de estadio
+    const {estado} = pedido;
+    // console.log(estado);
+
+    let claseEstado;
+    if(estado === 'PENDIENTE') {
+        claseEstado = 'border-warning';
+    } else if(estado === 'CANCELADO') {
+        claseEstado = 'border-danger';
+    } else {
+        claseEstado = 'border-success';
+    }
     
     return (
         <div className="col-md-4">
-            <div className={`card mb-3`} >
+            <div className={`card mb-3 ${claseEstado}`} >
                 <div className="card-body">
                     <p className="card-text font-weight-bold ">Estado:
                         <Mutation mutation={ACTUALIZAR_ESTADO}>

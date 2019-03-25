@@ -33,7 +33,7 @@ const PedidosCliente = (props) => {
                         ) 
                         if(error) return `Error ${error.message}`;
 
-                        console.log(data);
+                        // console.log(data);
 
                         return (
                             data.obtenerPedidos.map(pedido => (
