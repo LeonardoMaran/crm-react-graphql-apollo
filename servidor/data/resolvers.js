@@ -150,6 +150,14 @@ export const resolvers = {
                     else resolve(nuevoPedido)
                 })
             })
+        },
+        actualizarEstado: (root, {input}) => {
+            return new Promise((resolve, object) => {
+                Pedidos.findOneAndUpdate({_id: input.id}, input, {new: true}, (error) => {
+                    if(error) rejects(error);
+                    else resolve('El estado del pedido se actualizo correctamente.');
+                })
+            })
         }
     }
 }

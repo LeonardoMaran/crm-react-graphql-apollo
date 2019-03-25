@@ -116,4 +116,6 @@ type Mutation {
     # Pedidos
     """ Nuevo pedido """
     nuevoPedido(input: PedidoInput) : Pedido
+    """ Ye permite actualizar el estado de un pedido """
+    actualizarEstado(input: PedidoInput) : String
 }

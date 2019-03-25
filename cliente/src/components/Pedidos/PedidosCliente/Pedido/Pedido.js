@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import { OBTENER_PRODUTO } from './../../../../queries';
+import { ACTUALIZAR_ESTADO } from './../../../../mutations';
 
 import ResumenProducto from './ResumenProducto/ResumenProducto';
 
@@ -20,28 +21,34 @@ const Pedido = (props) => {
             <div className={`card mb-3`} >
                 <div className="card-body">
                     <p className="card-text font-weight-bold ">Estado:
-                            <select 
-                                value={pedido.estado}
-                                className="form-control my-3"
-                                onChange={e => {
-                                    // console.log(e.target.value);
+                        <Mutation mutation={ACTUALIZAR_ESTADO}>
+                            {actualizarEstado => (
+                                <select 
+                                    value={pedido.estado}
+                                    className="form-control my-3"
+                                    onChange={e => {
+                                        // console.log(e.target.value);
 
-                                    const input = {
-                                        id,
-                                        pedido: pedido.pedido,
-                                        fecha: pedido.fecha,
-                                        total: pedido.total,
-                                        cliente: props.cliente,
-                                        estado: e.target.value
-                                    }
-
-                                    console.log(input);
-                                    
-                                }} >
-                                    <option value="PENDIENTE">PENDIENTE</option>
-                                    <option value="COMPLETADO">COMPLETADO</option>
-                                    <option value="CANCELADO">CANCELADO</option>
-                            </select>
+                                        const input = {
+                                            id,
+                                            pedido: pedido.pedido,
+                                            fecha: pedido.fecha,
+                                            total: pedido.total,
+                                            cliente: props.cliente,
+                                            estado: e.target.value
+                                        }
+                                        // console.log(input);
+                                        actualizarEstado({
+                                            variables: {input}
+                                        })
+                                        
+                                    }} >
+                                        <option value="PENDIENTE">PENDIENTE</option>
+                                        <option value="COMPLETADO">COMPLETADO</option>
+                                        <option value="CANCELADO">CANCELADO</option>
+                                </select>
+                            )}
+                        </Mutation>
                     </p> 
                     <p className="card-text font-weight-bold">Pedido ID:
                         <span className="font-weight-normal"> {pedido.id}</span>
