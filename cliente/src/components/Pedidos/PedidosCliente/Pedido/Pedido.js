@@ -20,7 +20,17 @@ const Pedido = (props) => {
                     <p className="card-text font-weight-bold ">Estado:
                             <select 
                                 value={pedido.estado}
-                                className="form-control my-3">
+                                className="form-control my-3"
+                                onChange={e => {
+                                    // console.log(e.target.value);
+
+                                    const input = {
+                                        estado: e.target.value
+                                    }
+
+                                    console.log(input);
+                                    
+                                }} >
                                     <option value="PENDIENTE">PENDIENTE</option>
                                     <option value="COMPLETADO">COMPLETADO</option>
                                     <option value="CANCELADO">CANCELADO</option>

@@ -7,7 +7,7 @@ import { ELIMINAR_CLIENTE } from './../../mutations';
 
 import Paginador from './Paginador/Paginador';
 import Exito from './../Alertas/Exito';
-import NuevoPedido from './../Pedidos/NuevoPedido/NuevoPedido';
+// import NuevoPedido from './../Pedidos/NuevoPedido/NuevoPedido';
 
 
 class Clientes extends Component {
