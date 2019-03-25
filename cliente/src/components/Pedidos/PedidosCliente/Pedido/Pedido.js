@@ -10,6 +10,8 @@ const Pedido = (props) => {
 
     const pedido = props.pedido;
     // console.log(pedido);
+    const {id} = pedido;
+    // console.log(id);
 
     const fecha = new Date(Number(pedido.fecha));
     
@@ -25,6 +27,11 @@ const Pedido = (props) => {
                                     // console.log(e.target.value);
 
                                     const input = {
+                                        id,
+                                        pedido: pedido.pedido,
+                                        fecha: pedido.fecha,
+                                        total: pedido.total,
+                                        cliente: props.cliente,
                                         estado: e.target.value
                                     }
 
