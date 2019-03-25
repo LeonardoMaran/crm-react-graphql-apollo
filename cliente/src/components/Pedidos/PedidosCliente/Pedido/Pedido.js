@@ -38,12 +38,12 @@ const Pedido = (props) => {
 
                     <h3 className="card-text text-center mb-3">Artículos del pedido</h3>
                     
-                    {pedido.pedido.map(producto => {
+                    {pedido.pedido.map((producto, index) => {
                         const { id } = producto;
                         // console.log(producto);
 
                         return (
-                            <Query key={pedido.id} query={OBTENER_PRODUTO} variables={{id}}>
+                            <Query key={pedido.id+index} query={OBTENER_PRODUTO} variables={{id}}>
                                 {({loading, error, data}) => {
                                     if(loading) return 'Cargando...';
                                     if(error) return `Error ${error.message}`;
