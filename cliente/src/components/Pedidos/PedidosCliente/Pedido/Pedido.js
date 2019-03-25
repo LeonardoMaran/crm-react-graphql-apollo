@@ -3,6 +3,8 @@ import React from 'react'
 import { Query } from 'react-apollo';
 import { OBTENER_PRODUTO } from './../../../../queries';
 
+import ResumenProducto from './ResumenProducto/ResumenProducto';
+
 
 const Pedido = (props) => {
 
@@ -45,11 +47,13 @@ const Pedido = (props) => {
                                 {({loading, error, data}) => {
                                     if(loading) return 'Cargando...';
                                     if(error) return `Error ${error.message}`;
-
-                                    console.log(data);
+                                    // console.log(data);
 
                                     return (
-                                        <p>Hola</p>
+                                        <ResumenProducto
+                                            key={producto.id}
+                                            producto={data.obtenerProducto}
+                                            cantidad={producto.cantidad} />
                                     )
                                     
                                 }}
