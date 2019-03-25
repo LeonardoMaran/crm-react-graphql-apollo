@@ -1,10 +1,13 @@
 import React from 'react'
 
+import { Query } from 'react-apollo';
+import { OBTENER_PRODUTO } from './../../../../queries';
+
 
 const Pedido = (props) => {
 
     const pedido = props.pedido;
-    console.log(pedido);
+    // console.log(pedido);
 
     const fecha = new Date(Number(pedido.fecha));
     
@@ -32,6 +35,30 @@ const Pedido = (props) => {
                     </p>
 
                     <h3 className="card-text text-center mb-3">Artículos del pedido</h3>
+                    
+                    {pedido.pedido.map(producto => {
+                        const { id } = producto;
+                        // console.log(producto);
+
+                        return (
+                            <Query key={pedido.id} query={OBTENER_PRODUTO} variables={{id}}>
+                                {({loading, error, data}) => {
+                                    if(loading) return 'Cargando...';
+                                    if(error) return `Error ${error.message}`;
+
+                                    console.log(data);
+
+                                    return (
+                                        <p>Hola</p>
+                                    )
+                                    
+                                }}
+                            </Query>
+
+                        )
+                        
+                    })}
+
                 </div>
             </div>
         </div>
